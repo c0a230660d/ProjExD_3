@@ -34,7 +34,7 @@ class Bird:
         pg.K_LEFT: (-5, 0),
         pg.K_RIGHT: (+5, 0),
     }
-    img0 = pg.transform.rotozoom(pg.image.load("fig/3.png"), 0, 2.0)
+    img0 = pg.transform.rotozoom(pg.image.load("fig/beam.png"), 0, 2.0)
     img = pg.transform.flip(img0, True, False)  # デフォルトのこうかとん（右向き）
     imgs = {  # 0度から反時計回りに定義
         (+5, 0): img,  # 右
@@ -149,12 +149,18 @@ def main():
                 
         screen.blit(bg_img, [0, 0])
         
-        if bird.rct.colliderect(bomb.rct):
-            # ゲームオーバー時に，こうかとん画像を切り替え，1秒間表示させる
-            bird.change_img(8, screen)
-            pg.display.update()
-            time.sleep(1)
-            return
+        if bomb is not None:
+            if bird.rct.colliderect(bomb.rct):
+                # ゲームオーバー時に，こうかとん画像を切り替え，1秒間表示させる
+                bird.change_img(8, screen)
+                pg.display.update()
+                time.sleep(1)
+                return
+            
+        if not (beam is None or bomb is None):
+            if beam.rct.colliderect(bomb.rct):
+                beam = None
+                bomb = None
 
         key_lst = pg.key.get_pressed()
         bird.update(key_lst, screen)

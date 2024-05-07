@@ -34,7 +34,7 @@ class Bird:
         pg.K_LEFT: (-5, 0),
         pg.K_RIGHT: (+5, 0),
     }
-    img0 = pg.transform.rotozoom(pg.image.load("fig/beam.png"), 0, 2.0)
+    img0 = pg.transform.rotozoom(pg.image.load("fig/3.png"), 0, 2.0)
     img = pg.transform.flip(img0, True, False)  # デフォルトのこうかとん（右向き）
     imgs = {  # 0度から反時計回りに定義
         (+5, 0): img,  # 右
